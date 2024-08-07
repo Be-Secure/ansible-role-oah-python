@@ -1,0 +1,19 @@
+---
+- name: Checking required Python version
+  set_fact:
+    python_version: "{{ python_version | int }}"
+
+- name: Validate Python installation
+  shell: python{{ python_version }} --version
+  register: python_check
+  when: python_check.rc == 0
+
+- name: Print message if Python is found
+  debug:
+    msg: "Python already exists {{ python_check.stdout }}"
+  when: python_check.rc == 0
+
+- name: Print message if Python not found
+  debug:
+    msg: "Python not found"
+  when: python_check.rc == 1

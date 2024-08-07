@@ -1,0 +1,8 @@
+---
+- name: Uninstall Python  {{ python_version }}
+  become: yes
+  apt:
+    name: python{{ python_version }}
+    state: absent
+    autoremove: yes
+    purge: yes

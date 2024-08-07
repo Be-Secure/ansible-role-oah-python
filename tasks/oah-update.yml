@@ -1,0 +1,6 @@
+---
+- name: Removing Python
+  include_tasks: tasks/oah-remove.yml
+
+- name: Update Python
+  include_tasks: oah-install.yml
