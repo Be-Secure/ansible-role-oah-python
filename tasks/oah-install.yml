@@ -1,0 +1,29 @@
+---
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Ensure software-properties-common is installed
+  become: yes
+  apt:
+    name: software-properties-common
+    state: present
+
+- name: Add deadsnakes PPA key
+  become: yes
+  apt_key:
+    url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xBA6932366A755776"
+    state: present
+
+- name: Add deadsnakes PPA
+  become: yes
+  apt_repository:
+    repo: ppa:deadsnakes/ppa
+    state: present
+
+- name: Install Python {{ python_version }}
+  become: yes
+  apt:
+    name: "python{{ python_version }}"
+    state: present
